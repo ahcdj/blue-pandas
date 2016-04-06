@@ -3,7 +3,7 @@
 import os
 import pandas as pd
 import matplotlib.pyplot as plt
-from azuremlds import read_ds, get_data
+from util import get_data
 
 def plot_data(df,title="Stock prices"):
     '''Plot stock prices'''

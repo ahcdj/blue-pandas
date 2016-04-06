@@ -22,22 +22,6 @@ def read_ds(symbol):
     df_temp.fillna('nan')
     return df_temp
 
-def get_data(symbols, dates, join='inner'):
-    """Read stock data (adjusted close) for given symbols from CSV files """
-    df = pd.DataFrame(index=dates)
-    if 'SPY' not in symbols:
-        symbols.insert(0, 'SPY')
-
-    for symbol in symbols:
-        df_temp = read_ds(symbol)
-        df=df.join(df_temp,how=join)
-        if symbol == 'SPY':  # drop dates SPY did not trade
-            df = df.dropna(subset=["SPY"])
-        print df.head()
-
-    # reverse to incrementing date order
-    return df.iloc[::-1]
-
 def upload_df(filepath):
     filename = os.path.basename(filepath)
     print 'Uploading: ' + filename

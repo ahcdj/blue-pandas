@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import os
-from azuremlds import read_ds, get_data
+from util import get_data
 
 def fill_missing_values(df_data):
     """Fill missing values in data frame, in place."""
