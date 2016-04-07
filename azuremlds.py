@@ -10,12 +10,13 @@ from azureml.serialization import DataTypeIds
 
 ws = Workspace(workspace_id='a960dea614c04cf4a758c6321b857eb8', authorization_token='f527e8b37a58455494c08be5831119aa', endpoint='https://europewest.studio.azureml.net/')
 
-def symbol_to_path(symbol, base_dir="data"):
+def symbol_to_path(symbol, base_dir=""):
     """Return CSV file path given ticker symbol"""
     return os.path.join(base_dir, "{}.csv".format(str(symbol)))
 
 def read_ds(symbol):
-    ds = ws.datasets[symbol_to_path(symbol, base_dir='')]
+    print 'Reading ' + symbol + ' from server'
+    ds = ws.datasets[symbol_to_path(symbol)]
     df_temp = ds.to_dataframe()
     df_temp=df_temp.loc[:,['Date','Adj Close']].rename(columns={'Adj Close':symbol})
     df_temp.set_index('Date', inplace=True)
